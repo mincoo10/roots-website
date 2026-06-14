@@ -1176,7 +1176,8 @@ function saveAC(){try{localStorage.setItem('rdc_admin',JSON.stringify(adminCases
 loadAC();
 
 function openAdminPin(){
-  document.getElementById('adminOverlay').classList.add('open');
+  var ao=document.getElementById('adminOverlay');
+  ao.classList.add('open'); ao.style.display='block';
   document.getElementById('pinScreen').style.display='flex';
   document.getElementById('adminPanel').classList.remove('open');
   document.getElementById('pinInput').value='';
@@ -1194,7 +1195,7 @@ function submitPin(){
     document.getElementById('pinInput').value='';
   }
 }
-function closeAdmin(){document.getElementById('adminOverlay').classList.remove('open');document.getElementById('adminPanel').classList.remove('open');}
+function closeAdmin(){var ao=document.getElementById('adminOverlay');ao.classList.remove('open');ao.style.display='none';document.getElementById('adminPanel').classList.remove('open');}
 
 function setAdminFilter(btn){
   document.querySelectorAll('.a-filter').forEach(function(b){b.classList.remove('active');});
@@ -1291,7 +1292,7 @@ function openCaseForm(){
   document.getElementById('caseFormTitle').textContent='Add New Case';
   ['cf-cat','cf-initials','cf-summary','cf-duration','cf-notes','cf-testimonial'].forEach(function(id){document.getElementById(id).value='';});
   setAOrient('landscape');resetCfZones();renderCfExtras();
-  document.getElementById('caseFormOverlay').classList.add('open');
+  var cfo=document.getElementById('caseFormOverlay');cfo.classList.add('open');cfo.style.display='flex';
 }
 
 function openEditCase(idx){
@@ -1307,10 +1308,10 @@ function openEditCase(idx){
   setAOrient(cfOrient);resetCfZones();
   if(cfBefore)showCfZone('before',cfBefore);
   if(cfAfter)showCfZone('after',cfAfter);
-  renderCfExtras();document.getElementById('caseFormOverlay').classList.add('open');
+  renderCfExtras();var cfo=document.getElementById('caseFormOverlay');cfo.classList.add('open');cfo.style.display='flex';
 }
 
-function closeCaseForm(){document.getElementById('caseFormOverlay').classList.remove('open');}
+function closeCaseForm(){var cfo=document.getElementById('caseFormOverlay');cfo.classList.remove('open');cfo.style.display='none';}
 
 function setAOrient(o){
   cfOrient=o;
@@ -1406,7 +1407,7 @@ function startCropAdmin(type){
   cropAdminType=type;cropAdminOrig=type==='before'?cfBefore:cfAfter;if(!cropAdminOrig)return;
   document.getElementById('cropImgAdmin').src=cropAdminOrig;
   document.getElementById('cropSelAdmin').style.display='none';
-  document.getElementById('cropOverlayAdmin').classList.add('open');
+  var coa=document.getElementById('cropOverlayAdmin');coa.classList.add('open');coa.style.display='flex';
   caX=0;caY=0;caW=0;caH=0;caDrag=false;
   var img=document.getElementById('cropImgAdmin');
   img.onmousedown=function(e){caDrag=true;var r=img.getBoundingClientRect();caX=e.clientX-r.left;caY=e.clientY-r.top;caW=0;caH=0;updateCropSel();e.preventDefault();};
@@ -1443,7 +1444,7 @@ function applyCropAdmin(){
 }
 
 function closeCropAdmin(){
-  document.getElementById('cropOverlayAdmin').classList.remove('open');
+  var coa2=document.getElementById('cropOverlayAdmin');coa2.classList.remove('open');coa2.style.display='none';
   cropAdminType=null;caDrag=false;
   document.onmousemove=null;document.onmouseup=null;document.ontouchmove=null;document.ontouchend=null;
 }
@@ -1535,7 +1536,7 @@ function submitBooking(btn) {
 </script>
 
 <!-- ══ ADMIN PIN SCREEN ══ -->
-<div id="adminOverlay" class="admin-overlay">
+<div id="adminOverlay" class="admin-overlay" style="display:none;">
 
   <!-- PIN SCREEN -->
   <div id="pinScreen" class="pin-screen">
@@ -1584,7 +1585,7 @@ function submitBooking(btn) {
 </div>
 
 <!-- ══ ADD/EDIT CASE FORM ══ -->
-<div id="caseFormOverlay" class="aform-overlay">
+<div id="caseFormOverlay" class="aform-overlay" style="display:none;">
   <div class="aform">
     <div class="aform-head">
       <h3 id="caseFormTitle">Add New Case</h3>
@@ -1660,7 +1661,7 @@ function submitBooking(btn) {
 </div>
 
 <!-- ══ CROP TOOL ══ -->
-<div id="cropOverlayAdmin" class="crop-overlay-admin">
+<div id="cropOverlayAdmin" class="crop-overlay-admin" style="display:none;">
   <div class="crop-hint-txt">Drag to select area · Then tap Apply Crop</div>
   <div class="crop-cont" id="cropContAdmin">
     <img class="crop-img-el" id="cropImgAdmin" alt="Crop">
